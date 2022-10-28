@@ -5,5 +5,5 @@ export default class User implements IUser {
   username: string;
   role: string;
   email: string;
-  password: string;
+  password!: string;
 }

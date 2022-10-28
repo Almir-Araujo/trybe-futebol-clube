@@ -1,7 +1,9 @@
-import { compareSync } from 'bcryptjs';
-import encrypt from './Bcryptjs';
+// import { compareSync, hashSync } from 'bcryptjs';
 
-export default function compare(password: string) {
-  const hash = encrypt(password);
-  return compareSync(password, hash);
-}
+// export default function encrypt(password: string, hash: string) {
+//   const secret = hashSync(password);
+//   console.log('Secret', secret);
+//   const compare = compareSync(secret, hash);
+//   console.log('Compare', compare);
+//   return compare;
+// }

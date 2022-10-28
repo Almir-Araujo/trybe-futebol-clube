@@ -1,7 +1,8 @@
+import { compare } from 'bcryptjs';
 import createToken from '../helpers/TokenManager/TokenManager';
 import UserModel from '../database/models/UsersModel';
 import UnauthorizedError from '../errors/UnauthorizedError';
-// import compare from 'src/helpers/TokenManager/Compare';
+import User from '../database/models/entities/User';
 
 interface Irequest {
   email: string;
@@ -9,16 +10,16 @@ interface Irequest {
 }
 
 export default class UserService {
+  constructor(private model = UserModel) {}
+
   login = async ({ email, password }: Irequest): Promise<string> => {
-    const emailRegex = /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
-
-    if (!emailRegex.test(email)) throw new UnauthorizedError('Incorrect email or password');
-
-    const user = await UserModel.findOne({ where: { email } });
-
-    console.log(user?.getDataValue);
+    const user = await this.model.findOne({ where: { email } }) as unknown as { dataValues: User };
 
     if (!user) throw new UnauthorizedError('Incorrect email or password');
+
+    const comparePass = await compare(password, user.dataValues.password);
+
+    if (!comparePass) throw new UnauthorizedError('Incorrect email or password');
 
     const token = createToken(email, password);
 
