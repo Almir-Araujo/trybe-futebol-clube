@@ -1,5 +1,6 @@
 import * as express from 'express';
-import ErrorHandler from './middleware/ErrorHandler';
+import 'express-async-errors';
+import errorMiddleware from './middleware/ErrorHandler';
 import routes from './routes';
 
 class App {
@@ -26,7 +27,7 @@ class App {
     this.app.use(accessControl);
 
     this.app.use('/login', routes.login);
-    this.app.use(ErrorHandler.handler);
+    this.app.use(errorMiddleware);
   }
 
   public start(PORT: string | number):void {
