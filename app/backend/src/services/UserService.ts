@@ -1,27 +1,21 @@
 import { compare } from 'bcryptjs';
-import createToken from '../helpers/TokenManager/TokenManager';
 import UserModel from '../database/models/UsersModel';
 import UnauthorizedError from '../errors/UnauthorizedError';
-import User from '../database/models/entities/User';
-
-interface Irequest {
-  email: string;
-  password: string
-}
+import generateToken from '../helpers/TokenManager/generateToken';
 
 export default class UserService {
   constructor(private model = UserModel) {}
 
-  login = async ({ email, password }: Irequest): Promise<string> => {
-    const user = await this.model.findOne({ where: { email } }) as unknown as { dataValues: User };
+  public login = async (email: string, password: string) => {
+    const user = await UserModel.findOne({ where: { email } });
 
     if (!user) throw new UnauthorizedError('Incorrect email or password');
 
-    const comparePass = await compare(password, user.dataValues.password);
+    const comparePass = await compare(password, user.password);
 
     if (!comparePass) throw new UnauthorizedError('Incorrect email or password');
 
-    const token = createToken(email, password);
+    const token = generateToken(user);
 
     return token;
   };

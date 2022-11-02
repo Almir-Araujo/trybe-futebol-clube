@@ -4,6 +4,8 @@ import UserService from '../services/UserService';
 const userService = new UserService();
 
 export default class UserController {
+  constructor(private service: UserService) {}
+
   login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
@@ -16,7 +18,7 @@ export default class UserController {
       return res.status(401).json({ message: 'Incorrect email or password' });
     }
 
-    const token = await userService.login({ email, password });
+    const token = await userService.login(email, password);
 
     return res.status(200).json({ token });
   };
