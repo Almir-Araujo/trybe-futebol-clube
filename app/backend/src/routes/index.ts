@@ -1,4 +1,5 @@
-import login from './loginRoute';
-import team from './teamsRoute';
+import login from './LoginRoute';
+import team from './TeamsRoute';
+import match from './MatchesRoute';
 
-export default { login, team };
+export default { login, team, match };

@@ -28,6 +28,7 @@ class App {
 
     this.app.use('/login', routes.login);
     this.app.use('/teams', routes.team);
+    this.app.use('/matches', routes.match);
     this.app.use(errorMiddleware);
   }
 
