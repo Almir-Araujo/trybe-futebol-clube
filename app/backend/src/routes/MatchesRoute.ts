@@ -7,6 +7,7 @@ const service = new MatchesServices();
 const controller = new MatchesController(service);
 
 router.get('/', controller.getAllMatches);
-// router.get('/:id', controller.getTeamById);
+router.post('/', controller.insertNewMatch);
+router.patch('/:id/finish');
 
 export default router;

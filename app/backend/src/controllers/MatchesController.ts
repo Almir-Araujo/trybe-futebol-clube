@@ -15,4 +15,10 @@ export default class TeamsController {
     const matches = await this.service.getAllMatches();
     return res.status(200).json(matches);
   };
+
+  insertNewMatch = async (req: Request, res: Response) => {
+    const newMatch = req.body;
+    const newMatchInsert = await this.service.insertNewMatch(newMatch);
+    return res.status(201).json(newMatchInsert);
+  };
 }

@@ -1,3 +1,4 @@
+import IMatch from '../database/models/entities/IMatch';
 import MatchesModel from '../database/models/MatchesModel';
 import Team from '../database/models/TeamsModel';
 
@@ -37,5 +38,11 @@ export default class TeamsService {
       ],
     });
     return matchesByProgress;
+  };
+
+  insertNewMatch = async (match: IMatch) => {
+    const { id } = await MatchesModel.create(match);
+    const response = await MatchesModel.findByPk(id);
+    return response;
   };
 }

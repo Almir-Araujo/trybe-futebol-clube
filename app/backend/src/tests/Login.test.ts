@@ -7,6 +7,8 @@ import { app } from '../app';
 // import Example from '../database/models/ExampleModel';
 
 import { Response } from 'superagent';
+import { Model } from 'sequelize/types';
+import User from '../database/models/entities/User';
 
 chai.use(chaiHttp);
 
@@ -14,6 +16,9 @@ const { expect } = chai;
 
 describe('Testa o funcionamento do Endpoint "login"', () => {
   describe('Quando a requisição é realizada com sucesso', () => {
+    const user = { email: 'admin@admin.com', password: 'secret_admin' }
+    before(() => sinon.stub(Model, 'findOne'))
+    afterAll(() => sinon.restore)
     it('Deve retornar um status 200 e um token no body', async () => {
       const httpResponse = await chai
       .request(app)
@@ -66,6 +71,10 @@ describe('Testa o funcionamento do Endpoint "login"', () => {
 });
 
 
+
+function before(arg0: () => sinon.SinonStub<[options?: import("sequelize/types").FindOptions<any> | undefined], Promise<Model<any, any> | null>>) {
+  throw new Error('Function not implemented.');
+}
   /**
    * Exemplo do uso de stubs com tipos
    */
