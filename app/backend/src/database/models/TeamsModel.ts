@@ -1,8 +1,10 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
-// import OtherModel from './OtherModel';
 
-export default class Team extends Model {}
+export default class Team extends Model {
+  readonly id!: number;
+  teamName!: string;
+}
 
 Team.init({
   id: {
@@ -16,9 +18,8 @@ Team.init({
     allowNull: false,
   },
 }, {
-  // ... Outras configs
   underscored: true,
   sequelize: db,
-  // modelName: 'teams',
-  // timestamps: false,
+  modelName: 'teams',
+  timestamps: false,
 });

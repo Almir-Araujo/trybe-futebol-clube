@@ -27,6 +27,7 @@ class App {
     this.app.use(accessControl);
 
     this.app.use('/login', routes.login);
+    this.app.use('/teams', routes.team);
     this.app.use(errorMiddleware);
   }
 
