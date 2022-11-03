@@ -5,13 +5,14 @@ export default class TeamsController {
   constructor(private service: MatchesService) {}
 
   getAllMatches = async (req: Request, res: Response) => {
-    const teams = await this.service.getAllTMatches();
-    return res.status(200).json(teams);
-  };
+    const { inProgress } = req.query;
 
-  // getTeamById = async (req: Request, res: Response) => {
-  //   const { id } = req.params;
-  //   const team = await this.service.getTeamById(Number(id));
-  //   return res.status(200).json(team);
-  // };
+    if (inProgress) {
+      const matchesFiltered = await this.service.getMatchesByProgress(inProgress === 'true');
+      return res.status(200).json(matchesFiltered);
+    }
+
+    const matches = await this.service.getAllMatches();
+    return res.status(200).json(matches);
+  };
 }
