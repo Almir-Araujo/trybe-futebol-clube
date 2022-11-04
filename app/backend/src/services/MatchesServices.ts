@@ -45,4 +45,9 @@ export default class TeamsService {
     const response = await MatchesModel.findByPk(id);
     return response;
   };
+
+  updateMatchProgress = async (id: number) => {
+    const updateMatchProgress = await MatchesModel.update({ inProgress: false }, { where: { id } });
+    return updateMatchProgress;
+  };
 }
