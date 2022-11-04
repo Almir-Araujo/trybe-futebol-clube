@@ -17,8 +17,6 @@ const { expect } = chai;
 describe('Testa o funcionamento do Endpoint "login"', () => {
   describe('Quando a requisição é realizada com sucesso', () => {
     const user = { email: 'admin@admin.com', password: 'secret_admin' }
-    before(() => sinon.stub(Model, 'findOne'))
-    afterAll(() => sinon.restore)
     it('Deve retornar um status 200 e um token no body', async () => {
       const httpResponse = await chai
       .request(app)

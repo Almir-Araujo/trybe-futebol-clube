@@ -23,16 +23,16 @@ describe('Testa o funcionamento do Endpoint "Teams"', () => {
       expect(httpResponse.body).to.equal(teams)
     });
   })
-  // describe('Quando o campo email estiver vazio', () => {
-  //   it('Deve retornar um status 400 com a mensagem "All fields must be filled"', async () => {
-  //     const httpResponse = await chai
-  //     .request(app)
-  //     .post('/login')
-  //     .send({ password: 'any_password'})
-  //     expect(httpResponse.status).to.equal(400)
-  //     expect(httpResponse.body).to.deep.equal({ message: 'All fields must be filled' })
-  //   });
-  // })
+  describe('Quando a busca por feita por um id', () => {
+    const team = { id: 5, teamName: "Cruzeiro" };
+    it('Deve retornar um status 200 com o time correto"', async () => {
+      const httpResponse = await chai
+      .request(app)
+      .get('/teams/5')
+      expect(httpResponse.status).to.equal(200)
+      expect(httpResponse.body).to.deep.equal(team)
+    });
+  })
   // describe('Quando o campo password estiver vazio', () => {
   //   it('Deve retornar um status 400 com a mensagem "All fields must be filled"', async () => {
   //     const httpResponse = await chai
