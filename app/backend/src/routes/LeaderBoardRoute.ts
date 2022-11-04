@@ -1,11 +1,9 @@
-// import { Router } from 'express';
-// import LeaderboardService from '../services/LeaderboardService';
-// import LeaderboardController from '../controllers/LeaderboardController';
+import { Router } from 'express';
+import LeaderboardController from '../controllers/LeaderboardController';
 
-// const router = Router();
-// const service = new LeaderboardService();
-// const controller = new LeaderboardController(service);
+const router = Router();
+const controller = new LeaderboardController();
 
-// router.get('/home', controller.getHomeLeaderboard);
+router.get('/home', controller.getLeaderboard);
 
-// export default router;
+export default router;
