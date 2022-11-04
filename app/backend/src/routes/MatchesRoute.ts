@@ -10,5 +10,6 @@ const controller = new MatchesController(service);
 router.get('/', controller.getAllMatches);
 router.post('/', ValidateToken, controller.insertNewMatch);
 router.patch('/:id/finish', ValidateToken, controller.updateMatchProgress);
+router.patch('/:id', controller.updateInProgressMatchResults);
 
 export default router;

@@ -27,4 +27,10 @@ export default class TeamsController {
     await this.service.updateMatchProgress(Number(id));
     return res.status(200).json({ message: 'Finished' });
   };
+
+  updateInProgressMatchResults = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    await this.service.updateInProgressMatchResults(Number(id), req.body);
+    return res.status(200).json({ message: 'Match updated' });
+  };
 }

@@ -4,6 +4,11 @@ import IMatch from '../database/models/entities/IMatch';
 import MatchesModel from '../database/models/MatchesModel';
 import Team from '../database/models/TeamsModel';
 
+interface IUpdateMatchResult {
+  homeTeamGoals: number;
+  awayTeamGoals: number
+}
+
 export default class TeamsService {
   public getAllMatches = async () => {
     const matches = await MatchesModel.findAll({
@@ -59,6 +64,14 @@ export default class TeamsService {
 
   updateMatchProgress = async (id: number) => {
     const updateMatchProgress = await MatchesModel.update({ inProgress: false }, { where: { id } });
+    return updateMatchProgress;
+  };
+
+  updateInProgressMatchResults = async (id: number, body: IUpdateMatchResult) => {
+    const { awayTeamGoals, homeTeamGoals } = body;
+    console.log(homeTeamGoals, awayTeamGoals);
+    const updateMatchProgress = await MatchesModel
+      .update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
     return updateMatchProgress;
   };
 }
